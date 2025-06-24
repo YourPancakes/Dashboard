@@ -27,28 +27,34 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: List repo contents
+        run: ls -R .
+
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
+      - name: Restore .NET dependencies
         run: dotnet restore Dashboard.sln
 
-      - name: Build solution
-        run: dotnet build Dashboard.sln --configuration Release
+      - name: Build API
+        working-directory: .   
+        run: dotnet build --configuration Release
 
       - name: Run EF Migrations
-        working-directory: Backend
+        working-directory: .     
         env:
           ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
         run: |
           dotnet tool install --global dotnet-ef
-          export PATH="$HOME/.dotnet/tools:$PATH"
-          dotnet ef database update
+          export PATH="$PATH:~/.dotnet/tools"
+          dotnet ef database update \
+          --project Backend/Data \
+          --startup-project Backend
 
-      - name: Run integration tests
-        working-directory: Backend
+      - name: Run API Tests
+        working-directory: .     
         env:
           ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
         run: dotnet test --no-build --configuration Release --verbosity normal

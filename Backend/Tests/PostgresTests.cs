@@ -3,11 +3,11 @@ using Xunit;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 
-public class PostgresIntegrationTests : IDisposable
+public class PostgresTests : IDisposable
 {
     private readonly AppDbContext _db;
 
-    public PostgresIntegrationTests()
+    public PostgresTests()
     {
         var builder = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: false);
@@ -15,7 +15,8 @@ public class PostgresIntegrationTests : IDisposable
         var conn = config.GetConnectionString("Default");
 
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseNpgsql(conn)
+            .UseNpgsql(conn, npgsql =>
+                npgsql.MigrationsAssembly("Backend.Data"))
             .Options;
 
         _db = new AppDbContext(options);
