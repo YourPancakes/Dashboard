@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</None>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
@@ -25,14 +25,18 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
     <PackageReference Include="xunit" Version="2.9.3" />
-	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
-	<PackageReference Include="xunit.runner.visualstudio" Version="*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="*" />
   </ItemGroup>
   
   <ItemGroup>
-  <None Include="Keys\**\*.*">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </None>
+    <None Include="Keys\**\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Data\Migrations\**\*.cs" />
   </ItemGroup>
 
 </Project>
