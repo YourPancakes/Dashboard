@@ -8,19 +8,17 @@ The server part is implemented with ASP.NET Core API, uses Entity Framework Core
 
 The client side is written in React using functional components and hooks. Login page (LoginPage.tsx) performs credential submission and on successful authentication saves the JWT to localStorage and redirects to /dashboard. The main page (DashboardPage.tsx) displays a table of customers, modal forms for creating/editing a customer and viewing payment history, as well as a block for setting and updating the overall “rate”
 
-Translated with DeepL.com (free version)
-
 ---
 
 ## Start
 
 1. Clone the repository and run:  
    ```bash
-   git clone https://github.com/YourPancakes/AdminDashboard.git
-   cd AdminDashboard
+   git clone https://github.com/YourPancakes/Dashboard.git
+   cd Dashboard
    docker-compose up --build
 
-2. Frontend at http://localhost:5173  
+2. Frontend at [http://localhost:5173](http://localhost:5173/Login)  
 3. API at http://localhost:5000  
 4. Login credentials: admin@mirra.dev / admin123  
 
