@@ -1,44 +1,40 @@
-﻿< Project Sdk = "Microsoft.NET.Sdk.Web" >
+﻿using BackendDashboard.Api.Data;
+using Xunit;
+using Microsoft.EntityFrameworkCore;
+using Backend.Data;
 
-  < PropertyGroup >
-    < TargetFramework > net8.0 </ TargetFramework >
-    < Nullable > enable </ Nullable >
-    < ImplicitUsings > enable </ ImplicitUsings >
-  </ PropertyGroup >
+public class PostgresTests : IDisposable
+{
+    private readonly AppDbContext _db;
 
-  < ItemGroup >
-    < None Update = "appsettings.json" >
-      < CopyToOutputDirectory > PreserveNewest </ CopyToOutputDirectory >
-    </ None >
-    < PackageReference Include = "Microsoft.AspNetCore.Authentication.JwtBearer" Version = "8.0.14" />
-    < PackageReference Include = "Microsoft.EntityFrameworkCore" Version = "9.0.6" />
-    < PackageReference Include = "Microsoft.EntityFrameworkCore.Design" Version = "9.0.6" >
-      < PrivateAssets > all </ PrivateAssets >
-      < IncludeAssets > runtime; build; native; contentfiles; analyzers; buildtransitive </ IncludeAssets >
-    </ PackageReference >
-    < PackageReference Include = "Microsoft.EntityFrameworkCore.Sqlite" Version = "9.0.6" />
-    < PackageReference Include = "Microsoft.EntityFrameworkCore.SqlServer" Version = "9.0.6" />
-    < PackageReference Include = "Microsoft.EntityFrameworkCore.Tools" Version = "9.0.6" >
-      < PrivateAssets > all </ PrivateAssets >
-      < IncludeAssets > runtime; build; native; contentfiles; analyzers; buildtransitive </ IncludeAssets >
-    </ PackageReference >
-    < PackageReference Include = "Npgsql.EntityFrameworkCore.PostgreSQL" Version = "9.0.4" />
-    < PackageReference Include = "Swashbuckle.AspNetCore" Version = "9.0.1" />
-    < PackageReference Include = "xunit" Version = "2.9.3" />
-    < PackageReference Include = "Microsoft.NET.Test.Sdk" Version = "*" />
-    < PackageReference Include = "xunit.runner.visualstudio" Version = "*" />
-  </ ItemGroup >
+    public PostgresTests()
+    {
+        var builder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: false);
+        var config = builder.Build();
+        var conn = config.GetConnectionString("Default");
 
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseNpgsql(conn, npgsql =>
+                npgsql.MigrationsAssembly("Backend")) 
+            .Options;
 
-  < ItemGroup >
-    < None Include = "Keys\**\*.*" >
-      < CopyToOutputDirectory > Always </ CopyToOutputDirectory >
-    </ None >
-  </ ItemGroup >
+        _db = new AppDbContext(options);
+        _db.Database.EnsureDeleted();
+        _db.Database.EnsureCreated();
+        DbSeeder.Seed(_db);
+    }
 
-  < !--Include EF Core Migrations from Data/Migrations -->
-  <ItemGroup>
-    <Compile Include="Data\Migrations\**\*.cs" />
-  </ItemGroup>
+    [Fact]
+    public void Seed_Should_Create_3_Clients_5_Payments_1_Rate()
+    {
+        Assert.Equal(3, _db.Clients.Count());
+        Assert.Equal(5, _db.Payments.Count());
+        Assert.Single(_db.Rates);
+    }
 
-</Project>
+    public void Dispose()
+    {
+        _db.Dispose();
+    }
+}
