@@ -16,8 +16,8 @@ Translated with DeepL.com (free version)
 
 1. Clone the repository and run:  
    ```bash
-   git clone https://github.com/YourPancakes/AdminDashboard.git
-   cd AdminDashboard
+   https://github.com/YourPancakes/Dashboard.git
+   cd Dashboard
    docker-compose up --build
 
 2. Frontend at http://localhost:5173  
