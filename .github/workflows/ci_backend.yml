@@ -16,16 +16,19 @@ jobs:
           POSTGRES_DB: admindb
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: List repo contents
+        run: ls -R .
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
@@ -36,11 +39,11 @@ jobs:
         run: dotnet restore Dashboard.sln
 
       - name: Build API
-        working-directory: Dashboard.Api
+        working-directory: .   
         run: dotnet build --configuration Release
 
       - name: Run EF Migrations
-        working-directory: Dashboard.Api
+        working-directory: .     
         env:
           ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
         run: |
@@ -49,7 +52,7 @@ jobs:
           dotnet ef database update
 
       - name: Run API Tests
-        working-directory: Dashboard.Api
+        working-directory: .     
         env:
           ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
         run: dotnet test --no-build --configuration Release --verbosity normal
