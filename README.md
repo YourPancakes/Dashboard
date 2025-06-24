@@ -18,7 +18,7 @@ The client side is written in React using functional components and hooks. Login
    cd Dashboard
    docker-compose up --build
 
-2. Frontend at http://localhost:5173  
+2. Frontend at [http://localhost:5173](http://localhost:5173/Login)  
 3. API at http://localhost:5000  
 4. Login credentials: admin@mirra.dev / admin123  
 
