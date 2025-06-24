@@ -53,8 +53,9 @@ jobs:
             --project Backend \
             --startup-project Backend
 
-      - name: Run API Tests
-        working-directory: .     
-        env:
-          ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
-        run: dotnet test --no-build --configuration Release --verbosity normal
+        - name: Run API Tests
+          working-directory: Backend
+          env:
+            ConnectionStrings__Default: Host=localhost;Port=5432;Database=admindb;Username=postgres;Password=postgres
+          run: dotnet test Backend.csproj --no-build --configuration Release --verbosity normal
+
