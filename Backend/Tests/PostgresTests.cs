@@ -15,7 +15,8 @@ public class PostgresTests : IDisposable
         var conn = config.GetConnectionString("Default");
 
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseNpgsql(conn)
+            .UseNpgsql(conn, npgsql =>
+                npgsql.MigrationsAssembly("Backend")) 
             .Options;
 
         _db = new AppDbContext(options);

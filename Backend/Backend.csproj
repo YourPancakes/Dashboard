@@ -29,21 +29,10 @@
 	<PackageReference Include="xunit.runner.visualstudio" Version="*" />
   </ItemGroup>
   
-	<ItemGroup>
-	  <None Include="Keys\**\*.*">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Include="Data\Migrations\**\*.cs" />
-	</ItemGroup>
-  
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
+  <None Include="Keys\**\*.*">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
   </ItemGroup>
 
 </Project>
