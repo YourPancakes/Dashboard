@@ -14,7 +14,7 @@ The client side is written in React using functional components and hooks. Login
 
 1. Clone the repository and run:  
    ```bash
-   git https://github.com/YourPancakes/Dashboard.git
+   git clone https://github.com/YourPancakes/Dashboard.git
    cd Dashboard
    docker-compose up --build
 
