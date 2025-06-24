@@ -1,0 +1,30 @@
+.payments-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.payments-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.add-payment {
+  display: flex;
+  gap: 0.5rem;
+}
+.add-payment input {
+  flex: 1;
+  padding: 0.5rem;
+}
+.add-payment button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+.add-payment button:hover {
+  background-color: #0056b3;
+}

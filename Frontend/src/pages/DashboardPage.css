@@ -1,0 +1,159 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+  color: #333;
+  height: 100%;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.client-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.client-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.client-table th,
+.client-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.client-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+}
+
+.client-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.client-table td button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background: #6c757d;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.client-table td button:hover {
+  background: #5a6268;
+}
+
+.rate-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+
+.rate-label {
+  font-weight: bold;
+}
+
+.rate-block input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  flex: 1;
+  max-width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.rate-block button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: #fff;
+  cursor: pointer;
+}
+
+.rate-block button:hover {
+  background-color: #218838;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
